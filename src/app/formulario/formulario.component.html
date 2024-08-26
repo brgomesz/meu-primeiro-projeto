@@ -1,0 +1,45 @@
+<form (ngSubmit)="onSubmit()" class="formulario-box">
+  <div class="input-text">
+    <h3>FORMULÁRIO</h3>
+
+    <input
+      type="text"
+      id="nome"
+      [(ngModel)]="nome"
+      name="nome"
+      placeholder="Nome"
+    />
+    <input
+      type="text"
+      id="cidade"
+      [(ngModel)]="cidade"
+      name="cidade"
+      placeholder="Cidade"
+    />
+    <input
+      type="text"
+      id="estado"
+      [(ngModel)]="estado"
+      name="estado"
+      placeholder="Estado"
+    />
+
+    <button type="submit" class="btn btn-danger">Cadastrar</button>
+  </div>
+</form>
+
+<div class="resultados-formulario">
+  <div class="inicio-formulario">
+    <h3>Nomes cadastrados:</h3>
+  </div>
+
+  <div *ngIf="informacoes">
+    <ul>
+      <li class="linha-formulario" *ngFor="let info of informacoes">
+        <p>Nome: {{ info.nome }}</p>
+        <p>Cidade: {{ info.cidade }}</p>
+        <p>Estado: {{ info.estado }}</p>
+      </li>
+    </ul>
+  </div>
+</div>
