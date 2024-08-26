@@ -42,7 +42,7 @@ input {
 // }
 
 .resultados-formulario {
-  height: 400px;
+  height: auto;
   border: solid black 0px;
 }
 
@@ -50,4 +50,42 @@ input {
   height: auto;
   border: solid silver 1px;
   margin-top: 10px;
+  padding: 10px;
+}
+
+.botao-excluir,
+.botao-editar {
+  cursor: pointer;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #fff;
+  border: 0px solid #222;
+  height: auto;
+  align-content: center;
+  border-radius: 5px;
+}
+
+.botao-container {
+  right: 5px;
+  bottom: 100px;
+  display: flex;
+  justify-content: end;
+  align-content: center;
+}
+
+.botao-excluir {
+  background-color: rgba(238, 53, 53, 0.5);
+}
+.botao-excluir:hover {
+  background-color: rgb(238, 53, 53);
+}
+.botao-editar {
+  margin-right: 10px;
+  background-color: rgb(46, 182, 46, 0.5);
+  margin-left: 5px;
+}
+.botao-editar:hover {
+  margin-right: 10px;
+  background-color: rgb(46, 182, 46);
 }

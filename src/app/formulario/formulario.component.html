@@ -35,10 +35,14 @@
 
   <div *ngIf="informacoes">
     <ul>
-      <li class="linha-formulario" *ngFor="let info of informacoes">
+      <li class="linha-formulario" *ngFor="let info of informacoes; let i = index">
         <p>Nome: {{ info.nome }}</p>
         <p>Cidade: {{ info.cidade }}</p>
         <p>Estado: {{ info.estado }}</p>
+        <div class="botao-container">
+          <button class="botao-excluir" (click)="excluirItem(i)" >X</button>
+          <button class="botao-editar">Editar</button>
+        </div>
       </li>
     </ul>
   </div>

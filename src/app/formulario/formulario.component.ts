@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { LocalStorageService } from '../local-storage.service';
 
 @Component({
   selector: 'app-formulario',
@@ -14,6 +15,8 @@ export class FormularioComponent {
   cidade: string = '';
   estado: string = '';
 
+  constructor(private localStorageService: LocalStorageService) {}
+
   informacoes: {
     nome: string;
     cidade: string;
@@ -21,13 +24,29 @@ export class FormularioComponent {
   }[] = [];
 
   onSubmit() {
-    this.informacoes.push({
+    const info = {
       nome: this.nome,
       cidade: this.cidade,
       estado: this.estado,
-    });
+    };
+
+    this.informacoes.push(info);
+    this.localStorageService.setItem('informacoes', this.informacoes);
+
     this.nome = '';
     this.cidade = '';
     this.estado = '';
+  }
+
+  ngOnInit() {
+    const storedInfo = this.localStorageService.getItem('informacoes');
+    if (storedInfo) {
+      this.informacoes = storedInfo;
+    }
+  }
+
+  excluirItem(index: number) {
+    this.informacoes.splice(index, 1);
+    this.localStorageService.setItem('informacoes', this.informacoes);
   }
 }
