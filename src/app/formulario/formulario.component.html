@@ -1,49 +1,71 @@
-<form (ngSubmit)="onSubmit()" class="formulario-box">
-  <div class="input-text">
-    <h3>FORMULÁRIO</h3>
+<div *ngIf="show">
+  <form (ngSubmit)="onSubmit()" class="formulario-box">
+    <div class="input-text">
+      <h3>FORMULÁRIO</h3>
+      <input
+        type="text"
+        id="nome"
+        [(ngModel)]="nome"
+        name="nome"
+        placeholder="Nome"
+      />
+      <input
+        type="text"
+        id="cidade"
+        [(ngModel)]="cidade"
+        name="cidade"
+        placeholder="Cidade"
+      />
+      <input
+        type="text"
+        id="estado"
+        [(ngModel)]="estado"
+        name="estado"
+        placeholder="Estado"
+      />
 
-    <input
-      type="text"
-      id="nome"
-      [(ngModel)]="nome"
-      name="nome"
-      placeholder="Nome"
-    />
-    <input
-      type="text"
-      id="cidade"
-      [(ngModel)]="cidade"
-      name="cidade"
-      placeholder="Cidade"
-    />
-    <input
-      type="text"
-      id="estado"
-      [(ngModel)]="estado"
-      name="estado"
-      placeholder="Estado"
-    />
+      <button type="submit" class="btn btn-danger">Cadastrar</button>
+      <button type="button" class="btn btn-warning" (click)="closeFormulario()">
+        Fechar Formulário
+      </button>
+    </div>
+  </form>
+</div>
 
-    <button type="submit" class="btn btn-danger">Cadastrar</button>
-  </div>
-</form>
+<div class="centraliza-botao">
+  <button
+    type="button"
+    class="btn btn-success botao-exibir"
+    *ngIf="!show"
+    (click)="showFormulario()"
+  >
+    Mostrar Formulário
+  </button>
+</div>
 
 <div class="resultados-formulario">
   <div class="inicio-formulario">
-    <h3>Nomes cadastrados:</h3>
+    <div class="grid-display">
+      <h5>Nome</h5>
+      <h5>Cidade</h5>
+      <h5>Estado</h5>
+    </div>
   </div>
 
   <div *ngIf="informacoes">
-    <ul>
-      <li class="linha-formulario" *ngFor="let info of informacoes; let i = index">
-        <p>Nome: {{ info.nome }}</p>
-        <p>Cidade: {{ info.cidade }}</p>
-        <p>Estado: {{ info.estado }}</p>
+    <div class="list-group">
+      <div
+        class="list-group-item list-group-item-action grid-display"
+        *ngFor="let info of informacoes; let i = index"
+      >
+        <p>{{ info.nome }}</p>
+        <p>{{ info.cidade }}</p>
+        <p>{{ info.estado }}</p>
         <div class="botao-container">
-          <button class="botao-excluir" (click)="excluirItem(i)" >X</button>
-          <button class="botao-editar">Editar</button>
+          <button class="botao-excluir" (click)="excluirItem(i)">X</button>
+          <button class="botao-editar" (click)="editarItem(i)">Editar</button>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </div>

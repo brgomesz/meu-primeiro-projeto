@@ -15,6 +15,17 @@ export class FormularioComponent {
   cidade: string = '';
   estado: string = '';
 
+  show: boolean = false;
+
+  showFormulario() {
+    this.show = true;
+    console.log('Status da variavel', this.show);
+  }
+
+  closeFormulario() {
+    this.show = false;
+  }
+
   constructor(private localStorageService: LocalStorageService) {}
 
   informacoes: {
@@ -22,17 +33,28 @@ export class FormularioComponent {
     cidade: string;
     estado: string;
   }[] = [];
+  editIndex: number | null = null;
 
   onSubmit() {
-    const info = {
-      nome: this.nome,
-      cidade: this.cidade,
-      estado: this.estado,
-    };
+    if (this.editIndex !== null) {
+      this.informacoes[this.editIndex] = {
+        nome: this.nome,
+        cidade: this.cidade,
+        estado: this.estado,
+      };
+      this.editIndex = null;
+    } else {
+      const info = {
+        nome: this.nome,
+        cidade: this.cidade,
+        estado: this.estado,
+      };
+      this.informacoes.push(info);
+    }
 
-    this.informacoes.push(info);
     this.localStorageService.setItem('informacoes', this.informacoes);
 
+    // Limpar os campos do formulário após salvar
     this.nome = '';
     this.cidade = '';
     this.estado = '';
@@ -48,5 +70,12 @@ export class FormularioComponent {
   excluirItem(index: number) {
     this.informacoes.splice(index, 1);
     this.localStorageService.setItem('informacoes', this.informacoes);
+  }
+  editarItem(index: number) {
+    const info = this.informacoes[index];
+    this.nome = info.nome;
+    this.cidade = info.cidade;
+    this.estado = info.estado;
+    this.editIndex = index;
   }
 }
